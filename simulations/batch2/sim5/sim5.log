@@ -1,0 +1,642 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2006                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b45f8f6f58-20200629 OPENFOAM=2006
+Arch   : "LSB;label=32;scalar=64"
+Exec   : transpDomFoam
+Date   : Aug 26 2020
+Time   : 15:26:42
+Host   : bounty.maths.sissa.it
+PID    : 13607
+I/O    : uncollated
+Case   : /u/d/dpapapic/OpenFOAM/dpapapic-v2006/run/test/chap2/batch2/sim5
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Reading-in field r
+
+Reading-in field U
+
+Reading/calculating face flux field phi
+
+Reading-in constant/transportProperties
+
+Reading-in entries of keyword nu
+
+
+Computing transported (scalar) field
+
+Courant Number mean: 0.583333 max: 0.583333
+Time = 0.05
+
+nonePBiCG:  Solving for r, Initial residual = 0.0106278, Final residual = 8.62092e-10, No Iterations 18
+Time = 0.1
+
+nonePBiCG:  Solving for r, Initial residual = 0.00813488, Final residual = 8.69406e-10, No Iterations 35
+Time = 0.15
+
+nonePBiCG:  Solving for r, Initial residual = 0.00787265, Final residual = 3.83156e-10, No Iterations 36
+Time = 0.2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00849907, Final residual = 9.44298e-10, No Iterations 35
+Time = 0.25
+
+nonePBiCG:  Solving for r, Initial residual = 0.00850705, Final residual = 5.04728e-10, No Iterations 35
+Time = 0.3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00833948, Final residual = 7.21567e-10, No Iterations 35
+Time = 0.35
+
+nonePBiCG:  Solving for r, Initial residual = 0.00838656, Final residual = 5.43432e-10, No Iterations 34
+Time = 0.4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00848084, Final residual = 6.15774e-10, No Iterations 34
+Time = 0.45
+
+nonePBiCG:  Solving for r, Initial residual = 0.00825387, Final residual = 3.27672e-11, No Iterations 35
+Time = 0.5
+
+nonePBiCG:  Solving for r, Initial residual = 0.00826806, Final residual = 2.75688e-10, No Iterations 34
+Time = 0.55
+
+nonePBiCG:  Solving for r, Initial residual = 0.00829905, Final residual = 6.44391e-10, No Iterations 33
+Time = 0.6
+
+nonePBiCG:  Solving for r, Initial residual = 0.00808832, Final residual = 7.75842e-11, No Iterations 33
+Time = 0.65
+
+nonePBiCG:  Solving for r, Initial residual = 0.00816484, Final residual = 7.49251e-10, No Iterations 32
+Time = 0.7
+
+nonePBiCG:  Solving for r, Initial residual = 0.0081149, Final residual = 4.10602e-10, No Iterations 31
+Time = 0.75
+
+nonePBiCG:  Solving for r, Initial residual = 0.00809437, Final residual = 1.30907e-10, No Iterations 31
+Time = 0.8
+
+nonePBiCG:  Solving for r, Initial residual = 0.00804918, Final residual = 3.72235e-10, No Iterations 30
+Time = 0.85
+
+nonePBiCG:  Solving for r, Initial residual = 0.0079806, Final residual = 7.93456e-10, No Iterations 30
+Time = 0.9
+
+nonePBiCG:  Solving for r, Initial residual = 0.00802697, Final residual = 4.06105e-10, No Iterations 30
+Time = 0.95
+
+nonePBiCG:  Solving for r, Initial residual = 0.00792609, Final residual = 9.88909e-11, No Iterations 30
+Time = 1
+
+nonePBiCG:  Solving for r, Initial residual = 0.0079667, Final residual = 3.72624e-10, No Iterations 29
+Time = 1.05
+
+nonePBiCG:  Solving for r, Initial residual = 0.00792161, Final residual = 2.86411e-10, No Iterations 29
+Time = 1.1
+
+nonePBiCG:  Solving for r, Initial residual = 0.00790122, Final residual = 7.79297e-10, No Iterations 29
+Time = 1.15
+
+nonePBiCG:  Solving for r, Initial residual = 0.0078969, Final residual = 7.17256e-10, No Iterations 29
+Time = 1.2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00784143, Final residual = 4.55474e-10, No Iterations 28
+Time = 1.25
+
+nonePBiCG:  Solving for r, Initial residual = 0.0078679, Final residual = 9.3153e-10, No Iterations 27
+Time = 1.3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00780486, Final residual = 8.0321e-11, No Iterations 28
+Time = 1.35
+
+nonePBiCG:  Solving for r, Initial residual = 0.00783315, Final residual = 9.06988e-10, No Iterations 27
+Time = 1.4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00779737, Final residual = 5.24774e-10, No Iterations 26
+Time = 1.45
+
+nonePBiCG:  Solving for r, Initial residual = 0.00779906, Final residual = 2.80515e-10, No Iterations 26
+Time = 1.5
+
+nonePBiCG:  Solving for r, Initial residual = 0.0077844, Final residual = 2.11807e-10, No Iterations 26
+Time = 1.55
+
+nonePBiCG:  Solving for r, Initial residual = 0.00777497, Final residual = 6.59303e-10, No Iterations 25
+Time = 1.6
+
+nonePBiCG:  Solving for r, Initial residual = 0.00776579, Final residual = 3.53942e-10, No Iterations 24
+Time = 1.65
+
+nonePBiCG:  Solving for r, Initial residual = 0.00775288, Final residual = 2.11131e-10, No Iterations 24
+Time = 1.7
+
+nonePBiCG:  Solving for r, Initial residual = 0.00774624, Final residual = 1.7701e-10, No Iterations 24
+Time = 1.75
+
+nonePBiCG:  Solving for r, Initial residual = 0.00772972, Final residual = 1.34173e-10, No Iterations 24
+Time = 1.8
+
+nonePBiCG:  Solving for r, Initial residual = 0.00773538, Final residual = 8.93355e-10, No Iterations 20
+Time = 1.85
+
+nonePBiCG:  Solving for r, Initial residual = 0.00770766, Final residual = 4.9398e-10, No Iterations 20
+Time = 1.9
+
+nonePBiCG:  Solving for r, Initial residual = 0.0077244, Final residual = 9.80539e-10, No Iterations 16
+Time = 1.95
+
+nonePBiCG:  Solving for r, Initial residual = 0.00769763, Final residual = 8.24428e-10, No Iterations 18
+Time = 2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00771246, Final residual = 6.53732e-10, No Iterations 18
+Time = 2.05
+
+nonePBiCG:  Solving for r, Initial residual = 0.00769053, Final residual = 4.82385e-10, No Iterations 18
+Time = 2.1
+
+nonePBiCG:  Solving for r, Initial residual = 0.00770102, Final residual = 3.88939e-10, No Iterations 18
+Time = 2.15
+
+nonePBiCG:  Solving for r, Initial residual = 0.00768682, Final residual = 3.66895e-10, No Iterations 18
+Time = 2.2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00768947, Final residual = 3.4017e-10, No Iterations 18
+Time = 2.25
+
+nonePBiCG:  Solving for r, Initial residual = 0.00768284, Final residual = 4.2597e-10, No Iterations 20
+Time = 2.3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00767908, Final residual = 4.78976e-10, No Iterations 19
+Time = 2.35
+
+nonePBiCG:  Solving for r, Initial residual = 0.00767807, Final residual = 2.88128e-10, No Iterations 19
+Time = 2.4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00766952, Final residual = 2.88994e-10, No Iterations 18
+Time = 2.45
+
+nonePBiCG:  Solving for r, Initial residual = 0.00767286, Final residual = 1.50987e-10, No Iterations 17
+Time = 2.5
+
+nonePBiCG:  Solving for r, Initial residual = 0.00766354, Final residual = 4.57472e-10, No Iterations 16
+Time = 2.55
+
+nonePBiCG:  Solving for r, Initial residual = 0.00766741, Final residual = 1.0028e-10, No Iterations 17
+Time = 2.6
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765776, Final residual = 8.93273e-10, No Iterations 14
+Time = 2.65
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076635, Final residual = 7.40948e-10, No Iterations 14
+Time = 2.7
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765234, Final residual = 6.40288e-10, No Iterations 14
+Time = 2.75
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765975, Final residual = 5.22324e-10, No Iterations 14
+Time = 2.8
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076483, Final residual = 4.57184e-10, No Iterations 14
+Time = 2.85
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765626, Final residual = 3.70358e-10, No Iterations 14
+Time = 2.9
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764826, Final residual = 3.18123e-10, No Iterations 14
+Time = 2.95
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765402, Final residual = 2.69456e-10, No Iterations 14
+Time = 3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764768, Final residual = 2.2378e-10, No Iterations 14
+Time = 3.05
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765243, Final residual = 9.83369e-10, No Iterations 12
+Time = 3.1
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764688, Final residual = 8.4984e-10, No Iterations 12
+Time = 3.15
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076509, Final residual = 7.37359e-10, No Iterations 12
+Time = 3.2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764643, Final residual = 6.52603e-10, No Iterations 12
+Time = 3.25
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764991, Final residual = 5.60363e-10, No Iterations 12
+Time = 3.3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764648, Final residual = 5.02508e-10, No Iterations 12
+Time = 3.35
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764903, Final residual = 4.2683e-10, No Iterations 12
+Time = 3.4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764648, Final residual = 3.84051e-10, No Iterations 12
+Time = 3.45
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764891, Final residual = 3.34835e-10, No Iterations 12
+Time = 3.5
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764732, Final residual = 2.93438e-10, No Iterations 12
+Time = 3.55
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764874, Final residual = 2.60656e-10, No Iterations 12
+Time = 3.6
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076483, Final residual = 2.31071e-10, No Iterations 12
+Time = 3.65
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076486, Final residual = 2.02166e-10, No Iterations 12
+Time = 3.7
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764954, Final residual = 1.80133e-10, No Iterations 12
+Time = 3.75
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764847, Final residual = 1.59804e-10, No Iterations 12
+Time = 3.8
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765067, Final residual = 9.12172e-10, No Iterations 11
+Time = 3.85
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764908, Final residual = 8.11579e-10, No Iterations 11
+Time = 3.9
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076519, Final residual = 9.5323e-10, No Iterations 10
+Time = 3.95
+
+nonePBiCG:  Solving for r, Initial residual = 0.00764991, Final residual = 8.81218e-10, No Iterations 10
+Time = 4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765337, Final residual = 8.04783e-10, No Iterations 10
+Time = 4.05
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076512, Final residual = 7.41601e-10, No Iterations 10
+Time = 4.1
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765519, Final residual = 6.81467e-10, No Iterations 10
+Time = 4.15
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765241, Final residual = 6.31697e-10, No Iterations 10
+Time = 4.2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765652, Final residual = 5.82929e-10, No Iterations 10
+Time = 4.25
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765396, Final residual = 5.33625e-10, No Iterations 10
+Time = 4.3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765809, Final residual = 4.94443e-10, No Iterations 10
+Time = 4.35
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765581, Final residual = 4.58476e-10, No Iterations 10
+Time = 4.4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765975, Final residual = 4.26088e-10, No Iterations 10
+Time = 4.45
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765778, Final residual = 3.9728e-10, No Iterations 10
+Time = 4.5
+
+nonePBiCG:  Solving for r, Initial residual = 0.00766199, Final residual = 3.67109e-10, No Iterations 10
+Time = 4.55
+
+nonePBiCG:  Solving for r, Initial residual = 0.00765993, Final residual = 3.49321e-10, No Iterations 10
+Time = 4.6
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076642, Final residual = 3.31251e-10, No Iterations 10
+Time = 4.65
+
+nonePBiCG:  Solving for r, Initial residual = 0.00766231, Final residual = 3.28756e-10, No Iterations 10
+Time = 4.7
+
+nonePBiCG:  Solving for r, Initial residual = 0.00766636, Final residual = 3.20009e-10, No Iterations 10
+Time = 4.75
+
+nonePBiCG:  Solving for r, Initial residual = 0.00766497, Final residual = 3.27706e-10, No Iterations 10
+Time = 4.8
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076684, Final residual = 3.71172e-10, No Iterations 10
+Time = 4.85
+
+nonePBiCG:  Solving for r, Initial residual = 0.00766747, Final residual = 4.80458e-10, No Iterations 10
+Time = 4.9
+
+nonePBiCG:  Solving for r, Initial residual = 0.00767103, Final residual = 7.79429e-10, No Iterations 10
+Time = 4.95
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076701, Final residual = 1.1136e-10, No Iterations 11
+Time = 5
+
+nonePBiCG:  Solving for r, Initial residual = 0.00767377, Final residual = 4.33996e-10, No Iterations 10
+Time = 5.05
+
+nonePBiCG:  Solving for r, Initial residual = 0.00767295, Final residual = 7.91358e-10, No Iterations 10
+Time = 5.1
+
+nonePBiCG:  Solving for r, Initial residual = 0.00767647, Final residual = 8.665e-11, No Iterations 11
+Time = 5.15
+
+nonePBiCG:  Solving for r, Initial residual = 0.00767623, Final residual = 4.64198e-10, No Iterations 10
+Time = 5.2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00767883, Final residual = 9.94254e-10, No Iterations 9
+Time = 5.25
+
+nonePBiCG:  Solving for r, Initial residual = 0.00767907, Final residual = 8.939e-10, No Iterations 9
+Time = 5.3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00768176, Final residual = 8.45447e-10, No Iterations 9
+Time = 5.35
+
+nonePBiCG:  Solving for r, Initial residual = 0.00768225, Final residual = 7.91894e-10, No Iterations 9
+Time = 5.4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00768503, Final residual = 7.52016e-10, No Iterations 9
+Time = 5.45
+
+nonePBiCG:  Solving for r, Initial residual = 0.00768533, Final residual = 7.09186e-10, No Iterations 9
+Time = 5.5
+
+nonePBiCG:  Solving for r, Initial residual = 0.00768822, Final residual = 6.77788e-10, No Iterations 9
+Time = 5.55
+
+nonePBiCG:  Solving for r, Initial residual = 0.00768884, Final residual = 6.4568e-10, No Iterations 9
+Time = 5.6
+
+nonePBiCG:  Solving for r, Initial residual = 0.00769147, Final residual = 6.11069e-10, No Iterations 9
+Time = 5.65
+
+nonePBiCG:  Solving for r, Initial residual = 0.00769196, Final residual = 5.76032e-10, No Iterations 9
+Time = 5.7
+
+nonePBiCG:  Solving for r, Initial residual = 0.0076944, Final residual = 5.55142e-10, No Iterations 9
+Time = 5.75
+
+nonePBiCG:  Solving for r, Initial residual = 0.00769521, Final residual = 5.23745e-10, No Iterations 9
+Time = 5.8
+
+nonePBiCG:  Solving for r, Initial residual = 0.00769779, Final residual = 4.9739e-10, No Iterations 9
+Time = 5.85
+
+nonePBiCG:  Solving for r, Initial residual = 0.00769834, Final residual = 4.70269e-10, No Iterations 9
+Time = 5.9
+
+nonePBiCG:  Solving for r, Initial residual = 0.00770104, Final residual = 4.51872e-10, No Iterations 9
+Time = 5.95
+
+nonePBiCG:  Solving for r, Initial residual = 0.0077018, Final residual = 4.28718e-10, No Iterations 9
+Time = 6
+
+nonePBiCG:  Solving for r, Initial residual = 0.00770452, Final residual = 4.09048e-10, No Iterations 9
+Time = 6.05
+
+nonePBiCG:  Solving for r, Initial residual = 0.00770557, Final residual = 3.91968e-10, No Iterations 9
+Time = 6.1
+
+nonePBiCG:  Solving for r, Initial residual = 0.00770745, Final residual = 9.94284e-10, No Iterations 8
+Time = 6.15
+
+nonePBiCG:  Solving for r, Initial residual = 0.00770878, Final residual = 9.61932e-10, No Iterations 8
+Time = 6.2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00771075, Final residual = 9.03814e-10, No Iterations 8
+Time = 6.25
+
+nonePBiCG:  Solving for r, Initial residual = 0.00771205, Final residual = 8.64665e-10, No Iterations 8
+Time = 6.3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00771417, Final residual = 8.29573e-10, No Iterations 8
+Time = 6.35
+
+nonePBiCG:  Solving for r, Initial residual = 0.00771536, Final residual = 7.92913e-10, No Iterations 8
+Time = 6.4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00771763, Final residual = 7.54311e-10, No Iterations 8
+Time = 6.45
+
+nonePBiCG:  Solving for r, Initial residual = 0.00771905, Final residual = 7.30552e-10, No Iterations 8
+Time = 6.5
+
+nonePBiCG:  Solving for r, Initial residual = 0.00772102, Final residual = 7.11618e-10, No Iterations 8
+Time = 6.55
+
+nonePBiCG:  Solving for r, Initial residual = 0.00772233, Final residual = 6.877e-10, No Iterations 8
+Time = 6.6
+
+nonePBiCG:  Solving for r, Initial residual = 0.00772427, Final residual = 6.7516e-10, No Iterations 8
+Time = 6.65
+
+nonePBiCG:  Solving for r, Initial residual = 0.0077257, Final residual = 6.91766e-10, No Iterations 8
+Time = 6.7
+
+nonePBiCG:  Solving for r, Initial residual = 0.00772782, Final residual = 7.3386e-10, No Iterations 8
+Time = 6.75
+
+nonePBiCG:  Solving for r, Initial residual = 0.00772883, Final residual = 8.3959e-10, No Iterations 8
+Time = 6.8
+
+nonePBiCG:  Solving for r, Initial residual = 0.00773112, Final residual = 2.84516e-10, No Iterations 9
+Time = 6.85
+
+nonePBiCG:  Solving for r, Initial residual = 0.00773231, Final residual = 6.4775e-10, No Iterations 8
+Time = 6.9
+
+nonePBiCG:  Solving for r, Initial residual = 0.00773463, Final residual = 7.42075e-10, No Iterations 8
+Time = 6.95
+
+nonePBiCG:  Solving for r, Initial residual = 0.00773601, Final residual = 9.4912e-10, No Iterations 8
+Time = 7
+
+nonePBiCG:  Solving for r, Initial residual = 0.00773771, Final residual = 2.55771e-10, No Iterations 9
+Time = 7.05
+
+nonePBiCG:  Solving for r, Initial residual = 0.00773926, Final residual = 6.59104e-10, No Iterations 8
+Time = 7.1
+
+nonePBiCG:  Solving for r, Initial residual = 0.00774106, Final residual = 8.36435e-10, No Iterations 8
+Time = 7.15
+
+nonePBiCG:  Solving for r, Initial residual = 0.00774246, Final residual = 2.33955e-10, No Iterations 9
+Time = 7.2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00774448, Final residual = 6.0273e-10, No Iterations 8
+Time = 7.25
+
+nonePBiCG:  Solving for r, Initial residual = 0.00774569, Final residual = 7.66665e-10, No Iterations 8
+Time = 7.3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00774793, Final residual = 2.18096e-10, No Iterations 9
+Time = 7.35
+
+nonePBiCG:  Solving for r, Initial residual = 0.00774926, Final residual = 5.68367e-10, No Iterations 8
+Time = 7.4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00775128, Final residual = 7.19635e-10, No Iterations 8
+Time = 7.45
+
+nonePBiCG:  Solving for r, Initial residual = 0.00775238, Final residual = 2.05859e-10, No Iterations 9
+Time = 7.5
+
+nonePBiCG:  Solving for r, Initial residual = 0.00775445, Final residual = 5.48472e-10, No Iterations 8
+Time = 7.55
+
+nonePBiCG:  Solving for r, Initial residual = 0.00775562, Final residual = 6.79735e-10, No Iterations 8
+Time = 7.6
+
+nonePBiCG:  Solving for r, Initial residual = 0.00775787, Final residual = 1.96596e-10, No Iterations 9
+Time = 7.65
+
+nonePBiCG:  Solving for r, Initial residual = 0.00775873, Final residual = 5.34244e-10, No Iterations 8
+Time = 7.7
+
+nonePBiCG:  Solving for r, Initial residual = 0.00776106, Final residual = 6.75744e-10, No Iterations 8
+Time = 7.75
+
+nonePBiCG:  Solving for r, Initial residual = 0.00776215, Final residual = 1.90914e-10, No Iterations 9
+Time = 7.8
+
+nonePBiCG:  Solving for r, Initial residual = 0.00776444, Final residual = 5.30329e-10, No Iterations 8
+Time = 7.85
+
+nonePBiCG:  Solving for r, Initial residual = 0.00776578, Final residual = 6.86985e-10, No Iterations 8
+Time = 7.9
+
+nonePBiCG:  Solving for r, Initial residual = 0.00776724, Final residual = 1.87931e-10, No Iterations 9
+Time = 7.95
+
+nonePBiCG:  Solving for r, Initial residual = 0.00776885, Final residual = 5.31654e-10, No Iterations 8
+Time = 8
+
+nonePBiCG:  Solving for r, Initial residual = 0.00777034, Final residual = 6.78171e-10, No Iterations 8
+Time = 8.05
+
+nonePBiCG:  Solving for r, Initial residual = 0.00777198, Final residual = 9.81504e-10, No Iterations 8
+Time = 8.1
+
+nonePBiCG:  Solving for r, Initial residual = 0.00777352, Final residual = 1.95059e-10, No Iterations 9
+Time = 8.15
+
+nonePBiCG:  Solving for r, Initial residual = 0.00777506, Final residual = 6.95629e-10, No Iterations 8
+Time = 8.2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00777664, Final residual = 1.91897e-10, No Iterations 9
+Time = 8.25
+
+nonePBiCG:  Solving for r, Initial residual = 0.00777839, Final residual = 5.55354e-10, No Iterations 8
+Time = 8.3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00777967, Final residual = 6.86327e-10, No Iterations 8
+Time = 8.35
+
+nonePBiCG:  Solving for r, Initial residual = 0.00778132, Final residual = 9.87176e-10, No Iterations 8
+Time = 8.4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00778237, Final residual = 2.03755e-10, No Iterations 9
+Time = 8.45
+
+nonePBiCG:  Solving for r, Initial residual = 0.0077843, Final residual = 7.04663e-10, No Iterations 8
+Time = 8.5
+
+nonePBiCG:  Solving for r, Initial residual = 0.00778536, Final residual = 9.87766e-10, No Iterations 8
+Time = 8.55
+
+nonePBiCG:  Solving for r, Initial residual = 0.00778712, Final residual = 2.14884e-10, No Iterations 9
+Time = 8.6
+
+nonePBiCG:  Solving for r, Initial residual = 0.00778839, Final residual = 6.97389e-10, No Iterations 8
+Time = 8.65
+
+nonePBiCG:  Solving for r, Initial residual = 0.0077901, Final residual = 9.23727e-10, No Iterations 8
+Time = 8.7
+
+nonePBiCG:  Solving for r, Initial residual = 0.00779153, Final residual = 2.34498e-10, No Iterations 9
+Time = 8.75
+
+nonePBiCG:  Solving for r, Initial residual = 0.0077932, Final residual = 6.55799e-10, No Iterations 8
+Time = 8.8
+
+nonePBiCG:  Solving for r, Initial residual = 0.00779414, Final residual = 7.98136e-10, No Iterations 8
+Time = 8.85
+
+nonePBiCG:  Solving for r, Initial residual = 0.00779576, Final residual = 2.74518e-10, No Iterations 9
+Time = 8.9
+
+nonePBiCG:  Solving for r, Initial residual = 0.007797, Final residual = 6.13291e-10, No Iterations 8
+Time = 8.95
+
+nonePBiCG:  Solving for r, Initial residual = 0.00779848, Final residual = 6.79628e-10, No Iterations 8
+Time = 9
+
+nonePBiCG:  Solving for r, Initial residual = 0.00780003, Final residual = 7.69989e-10, No Iterations 8
+Time = 9.05
+
+nonePBiCG:  Solving for r, Initial residual = 0.00780099, Final residual = 8.61606e-10, No Iterations 8
+Time = 9.1
+
+nonePBiCG:  Solving for r, Initial residual = 0.00780286, Final residual = 9.21527e-10, No Iterations 8
+Time = 9.15
+
+nonePBiCG:  Solving for r, Initial residual = 0.00780349, Final residual = 9.33747e-10, No Iterations 8
+Time = 9.2
+
+nonePBiCG:  Solving for r, Initial residual = 0.00780551, Final residual = 9.02016e-10, No Iterations 8
+Time = 9.25
+
+nonePBiCG:  Solving for r, Initial residual = 0.00780619, Final residual = 8.38797e-10, No Iterations 8
+Time = 9.3
+
+nonePBiCG:  Solving for r, Initial residual = 0.00780788, Final residual = 7.70689e-10, No Iterations 8
+Time = 9.35
+
+nonePBiCG:  Solving for r, Initial residual = 0.00780892, Final residual = 7.11805e-10, No Iterations 8
+Time = 9.4
+
+nonePBiCG:  Solving for r, Initial residual = 0.00781049, Final residual = 6.59577e-10, No Iterations 8
+Time = 9.45
+
+nonePBiCG:  Solving for r, Initial residual = 0.00781161, Final residual = 6.2354e-10, No Iterations 8
+Time = 9.5
+
+nonePBiCG:  Solving for r, Initial residual = 0.00781306, Final residual = 5.97398e-10, No Iterations 8
+Time = 9.55
+
+nonePBiCG:  Solving for r, Initial residual = 0.00781427, Final residual = 5.86446e-10, No Iterations 8
+Time = 9.6
+
+nonePBiCG:  Solving for r, Initial residual = 0.00781521, Final residual = 5.87976e-10, No Iterations 8
+Time = 9.65
+
+nonePBiCG:  Solving for r, Initial residual = 0.00781679, Final residual = 5.94892e-10, No Iterations 8
+Time = 9.7
+
+nonePBiCG:  Solving for r, Initial residual = 0.00781721, Final residual = 6.12637e-10, No Iterations 8
+Time = 9.75
+
+nonePBiCG:  Solving for r, Initial residual = 0.00781914, Final residual = 6.3767e-10, No Iterations 8
+Time = 9.8
+
+nonePBiCG:  Solving for r, Initial residual = 0.00781966, Final residual = 6.59528e-10, No Iterations 8
+Time = 9.85
+
+nonePBiCG:  Solving for r, Initial residual = 0.00782154, Final residual = 6.86086e-10, No Iterations 8
+Time = 9.9
+
+nonePBiCG:  Solving for r, Initial residual = 0.00782245, Final residual = 9.849e-10, No Iterations 7
+Time = 9.95
+
+nonePBiCG:  Solving for r, Initial residual = 0.0078236, Final residual = 9.58782e-10, No Iterations 7
+Time = 10
+
+nonePBiCG:  Solving for r, Initial residual = 0.00782491, Final residual = 9.16721e-10, No Iterations 7
+End
+

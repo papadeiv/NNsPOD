@@ -14,7 +14,7 @@ sigm = nn.Sigmoid
 lr = 0.01
 n_layers = 2
 inner_size = 2
-niter = 1
+niter = 2
 dt = 0.0784
 
 ################################################################################
@@ -63,9 +63,9 @@ for epoch in range(niter):
 
         optimizer.zero_grad()
 
-        loss = None
+        loss = torch.empty(1, requires_grad=False)
 
-        y_ref = y_db.T[0]
+        y_ref = y_db.T[0].clone()
 
         for n in range(len(timesteps)):
 
@@ -74,7 +74,7 @@ for epoch in range(niter):
             # Consider the n-th snapshot
 
             x = x_db.T[n]
-            x_ref = x
+            x_ref = x.detach().numpy()
             x_copy = x
 
             # print("We are considering the ", n, "-th snapshot")
@@ -167,32 +167,34 @@ for epoch in range(niter):
 
             for j in range(len(new_x)):
 
-                y_to_be_shifted = y[j]
+                y_to_be_shifted = (y[j]).detach().numpy()
 
-                target_x_min, target_x_max = new_x_list[j] 
+                target_x_min = np.int8(new_x_list[j][0])
+                target_x_max = np.int8(new_x_list[j][1])
 
-                dx_min_from_target, dx_max_from_target = dx[j]
+                dx_min_from_target = np.float32((dx[j][0]).detach().numpy())
+                dx_max_from_target = np.float32((dx[j][1]).detach().numpy())
 
-                shifted_y[target_x_min] += -y_to_be_shifted*interp_coeff*dx_max_from_target
+                shifted_y[target_x_min] += -y_to_be_shifted*interp_coeff*dx_min_from_target
                 shifted_y[target_x_max] += y_to_be_shifted*interp_coeff*dx_max_from_target
 
             # print("Post-shift and post-interpolation snapshot's values: ", shifted_y)
 
-            shifted_y = shifted_y.clone().detach().requires_grad_(True)
+            shifted_y = shifted_y.clone().requires_grad_(True)
 
-            if loss is None:
-                loss = criterion(y_ref, shifted_y)
-                loss.retain_grad()
-            else:
-                loss += criterion(y_ref, shifted_y)
-                loss.retain_grad()
+            for j in range(len(y_db.T[n])):
+
+            	y_db.T[n][j] = shifted_y[j]
+
+            loss += criterion(y_ref, y_db.T[n])
+            loss.retain_grad()
 
             if (n>=195):
                 print(loss, loss.requires_grad, loss.grad)
 
         # Backward propagation pass on net
 
-        loss.backward()
+        loss.backward(retain_graph=True)
         print(loss, loss.grad)
         return loss
 

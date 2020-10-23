@@ -1,0 +1,8 @@
+The reference is the 50-th snapshot
+Number of snapshots: 101
+Full-order (snapshot) dimension: 2500
+
+InterpNet loss starts at 0.089765
+InterpNet loss at 99 epochs: 0.008180
+Epoch [0]    ShiftNet loss = 54.771723 
+The learning rate has been updated 0 times

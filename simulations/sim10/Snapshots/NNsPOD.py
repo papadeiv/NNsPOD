@@ -169,7 +169,7 @@ previous_loss = sys.float_info.max
 lr_update = 0
 idx_plot = 0
 
-for epoch in range(50):
+for epoch in range(1):
 
     def compute_loss():
         optimizer.zero_grad()
@@ -252,14 +252,14 @@ fio.close()
 X = np.zeros((Nh, Ns))
 counter = 0
 
-for j, k, t in zip(x, y, timesteps):
+for j, k, t in zip(x.T, y.T, timesteps):
 
-    input_ = torch.cat((j.reshape(-1, 1).float(), k.reshape(-1, 1).float(), torch.ones((j.shape[0],1), dtype=torch.float, requires_grad=True)*t), -1)
+    input_ = torch.cat((j.reshape(-1, 1).float(), k.reshape(-1, 1).float(), torch.ones((j.shape[0],1), dtype=torch.float, requires_grad=True)*t.item()), axis=-1)
 
     shift = ShiftNet(input_)
 
-    shifted_x = j - shift[:, 0]
-    shifted_y = k - shift[:, 1]
+    shifted_x = j.reshape(-1, 1) - shift[:, 0].reshape(-1, 1)
+    shifted_y = k.reshape(-1, 1) - shift[:, 1].reshape(-1, 1)
 
     shifted_input = torch.cat((shifted_x.reshape(-1, 1), shifted_y.reshape(-1, 1)), 1)
 
@@ -271,7 +271,7 @@ for j, k, t in zip(x, y, timesteps):
 
     snapshot = snapshot.detach().numpy()
 
-    X[counter, :] = snapshot
+    X[:, counter] = snapshot
 
     counter+=1
 

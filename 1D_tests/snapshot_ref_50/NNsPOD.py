@@ -29,7 +29,9 @@ for i in range(1, 205):
     y_db.append(y)
     x_db.append(x)
 y_db = torch.tensor(y_db, requires_grad=True).T
+# x_db.shape = torch.Size([200, 204])
 x_db = torch.tensor(x_db, requires_grad=True).T
+# y_db.shape = torch.Size([200, 204])
 
 ################# INTERPOLATION NEURAL NET #################
 
@@ -41,7 +43,7 @@ class InterpNet():
         self.lr = 0.1
         self.n_layers = 2
         self.inner_size = 20
-        self.epoch = 1000
+        self.epoch = 10
 
         inner_layers = []
         for _ in range(self.n_layers):
@@ -74,7 +76,10 @@ class InterpNet():
 
 
 x_ref = x_db.T[ref].clone().float().reshape(-1, 1)
+# x_ref.shape = torch.Size([200, 1])
 y_ref = y_db.T[ref].clone().float().reshape(-1, 1)
+# y_ref.shape = torch.Size([200, 1])
+
 trained_interpolation = InterpNet(x_ref, y_ref)
 
 ################# SHIFT-DETECTING NEURAL NET #################
@@ -109,6 +114,9 @@ def test_plot(idx):
     shift = ShiftNet(input_)
     shifted_x = x_test.reshape(shift.shape) - shift
 
+    np.savetxt("Shifted_x({:d})".format(idx), shifted_x.T.detach().numpy(), newline=" ")
+    np.savetxt("timestep({:d})".format(idx), (torch.ones((x.shape[0], 1), dtype=torch.float, requires_grad=True)*t).detach().numpy(), newline=" ")
+
     plt.cla()
     plt.plot(x_test.detach(), y_test.detach(), '-b', label='Test snapshot')
     plt.plot(shifted_x.detach(), y_test.detach(), '--r', label='Shifted snapshot')
@@ -133,13 +141,22 @@ for epoch in range(300):
 
         for x, y, t in zip(x_db.T, y_db.T, timesteps):
 
+            # x.shape = y.shape = torch.Size([200])
+
             input_ = torch.cat((
                 x.reshape(-1, 1).float(),
                 torch.ones((x.shape[0], 1), dtype=torch.float, requires_grad=True)*t),
                 axis=-1)
 
+            # input_.shape = torch.Size([200, 2])
+
             shift = ShiftNet(input_)
+
+            # shift.shape = torch.Size([200, 1])
+
             shifted_x = x.reshape(-1, 1) - shift
+
+            # shifted_x.shape = torch.Size([200, 1])
 
             shifted_y = trained_interpolation.forward(shifted_x.float()).flatten()
 

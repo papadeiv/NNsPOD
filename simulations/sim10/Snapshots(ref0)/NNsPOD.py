@@ -92,7 +92,7 @@ class InterpNet():
     def forward(self, input):
         return self.model(input)
 
-f_ref = f[:, ref].clone().float().reshape(-1, 1)
+f_ref = f.T[ref].clone().float().reshape(-1, 1)
 # f_ref.shape = torch.Size([Nh, 1])
 
 x_ref = x.T[ref].clone().float().reshape(-1, 1)
@@ -135,11 +135,22 @@ def test_plot(idx):
     idx_test = 0
     t = timesteps[idx_test]
     x_test = x.T[idx_test]
-    x_test = x_test[:50]
+    x_test = x_test[2200:2250]
     y_test = y.T[idx_test]
-    y_test = y_test[:50]
+    y_test = y_test[2200:2250]
     f_test = f.T[idx_test]
-    f_test = f_test[:50]
+    f_test = f_test[2200:2250]
+
+    x_new_ref = x_ref[1900:1950]
+    y_new_ref = y_ref[1900:1950]
+    f_new_ref = f_ref[1900:1950]
+
+    np.savetxt("x_test", x_test.detach().numpy(), newline="\n")
+    np.savetxt("x_ref", x_new_ref.detach().numpy(), newline="\n")
+    np.savetxt("y_test", y_test.detach().numpy(), newline="\n")
+    np.savetxt("y_ref", y_new_ref.detach().numpy(), newline="\n")
+    np.savetxt("f_test", f_test.detach().numpy(), newline="\n")
+    np.savetxt("f_ref", f_new_ref.detach().numpy(), newline="\n")
 
     input_ = torch.cat((
         x_test.reshape(-1, 1).float(), y_test.reshape(-1, 1).float(), 
@@ -157,7 +168,7 @@ def test_plot(idx):
     plt.cla()
     plt.plot(x_test.detach(), f_test.detach(), '-b', label='Test snapshot')
     plt.plot(shifted_x.detach(), f_test.detach(), '--r', label='Shifted snapshot')
-    plt.plot(x_ref.detach(), f_ref.detach(), '--g', label='Refernce snapshot')
+    plt.plot(x_new_ref.detach(), f_new_ref.detach(), '--g', label='Refernce snapshot')
     plt.suptitle('The reference is the 100-th snapshot; the test is the IC snapshot', fontsize=10)
     plt.legend()
 
@@ -169,14 +180,21 @@ previous_loss = sys.float_info.max
 lr_update = 0
 idx_plot = 0
 
-for epoch in range(50):
+for epoch in range(100):
 
     def compute_loss():
         optimizer.zero_grad()
 
         loss = 0.0
 
+        idx_t = 0
+
         for j, k, t, l in zip(x.T, y.T, timesteps, f.T):
+
+            if(idx_t==ref or idx_t==0):
+                np.savetxt("f({:d})".format(idx_t), l.detach().numpy(), newline="\n")
+
+            idx_t += 1
 
             # j.shape = k.shape = f.shape = torch.Size([Nh])
 
@@ -240,8 +258,8 @@ for epoch in range(50):
         fio.write("\n")
         fio.write("Epoch [{:d}]    ShiftNet loss = {:f} ".format(epoch, loss))
 
-    # test_plot(idx_plot)
-    # idx_plot +=1
+    test_plot(idx_plot)
+    idx_plot +=1
 
 fio.write("\n")
 fio.write("The learning rate has been updated {:d} times".format(lr_update))

@@ -28,10 +28,8 @@ for i in range(1, 205):
     # y, x = np.genfromtxt(fname, usecols=(1, 2), delimiter=',', skip_header=1).T
     y_db.append(y)
     x_db.append(x)
-y_db = torch.tensor(y_db, requires_grad=True).T
-# x_db.shape = torch.Size([200, 204])
-x_db = torch.tensor(x_db, requires_grad=True).T
-# y_db.shape = torch.Size([200, 204])
+y_db = torch.tensor(y_db, requires_grad=True).T # x_db.shape = torch.Size([200, 204])
+x_db = torch.tensor(x_db, requires_grad=True).T # y_db.shape = torch.Size([200, 204])
 
 ################# INTERPOLATION NEURAL NET #################
 
@@ -75,10 +73,8 @@ class InterpNet():
         return self.model(input)
 
 
-x_ref = x_db.T[ref].clone().float().reshape(-1, 1)
-# x_ref.shape = torch.Size([200, 1])
-y_ref = y_db.T[ref].clone().float().reshape(-1, 1)
-# y_ref.shape = torch.Size([200, 1])
+x_ref = x_db.T[ref].clone().float().reshape(-1, 1) # x_ref.shape = torch.Size([200, 1])
+y_ref = y_db.T[ref].clone().float().reshape(-1, 1) # y_ref.shape = torch.Size([200, 1])
 
 trained_interpolation = InterpNet(x_ref, y_ref)
 
@@ -113,9 +109,6 @@ def test_plot(idx):
 
     shift = ShiftNet(input_)
     shifted_x = x_test.reshape(shift.shape) - shift
-
-    np.savetxt("Shifted_x({:d})".format(idx), shifted_x.T.detach().numpy(), newline=" ")
-    np.savetxt("timestep({:d})".format(idx), (torch.ones((x.shape[0], 1), dtype=torch.float, requires_grad=True)*t).detach().numpy(), newline=" ")
 
     plt.cla()
     plt.plot(x_test.detach(), y_test.detach(), '-b', label='Test snapshot')

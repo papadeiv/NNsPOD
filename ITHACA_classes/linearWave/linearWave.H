@@ -71,7 +71,7 @@ class linearWave: public reductionProblem
 
         PtrList<volScalarField> field; // List of pointes to assemble the solution field snapshots matrix
 
-        Modes<scalar> LSV; // List of pointers to assemble the reduced basis modes matrix (Left Singular Vectors)
+        volScalarModes LSV; // List of pointers to assemble the reduced basis modes matrix (Left Singular Vectors)
 
         /* Member functions */
 

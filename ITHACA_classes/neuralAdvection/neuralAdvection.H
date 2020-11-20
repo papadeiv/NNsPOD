@@ -77,7 +77,13 @@ class neuralAdvection: public steadyNS
 
         autoPtr<volScalarField> _shifted_f;
 
-        Modes<scalar> fmodes;
+        volScalarModes fmodes;
+
+        // Reduced Matrices
+        /// A matrices
+        List<Eigen::MatrixXd> A_matrices;
+        /// Source vector
+        Eigen::MatrixXd source;
 
         bool flag;
 
@@ -90,6 +96,8 @@ class neuralAdvection: public steadyNS
         void truthSolve(List<scalar> mu_now, fileName folder = "./ITHACAoutput/Offline/");
 
         bool checkWrite(Time& timeObject);
+
+        void projection(label Nr);
 
         virtual vector evaluateField(scalar x, scalar y, scalar t);
 };

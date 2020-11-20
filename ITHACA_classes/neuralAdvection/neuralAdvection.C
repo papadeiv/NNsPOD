@@ -189,7 +189,7 @@ void neuralAdvection::truthSolve(List<scalar> mu_now, fileName folder)
       }
     }
 
-    std::ofstream output_file("./Snapshots/timesteps.txt");
+    std::ofstream output_file("./ITHACAoutput/NUMPYsnapshots/timesteps.txt");
     std::ostream_iterator<float> output_iterator(output_file, "\n");
     std::copy(timesteps.begin(), timesteps.end(), output_iterator);
 
@@ -200,49 +200,8 @@ void neuralAdvection::truthSolve(List<scalar> mu_now, fileName folder)
 
     Eigen::MatrixXd snapshot(Nh, 3);
 
-    // Eigen::MatrixXd  snapshotMatrix(Nh, Ns);
-
     volScalarField x("x",mesh.C().component(vector::X));
     volScalarField y("y",mesh.C().component(vector::Y));
-
-    // autoPtr<volScalarField> _x;
-    // autoPtr<volScalarField> _y;
-
-    // _x = autoPtr<volScalarField>
-    //  (
-    //      new volScalarField
-    //      (
-    //          IOobject
-    //          (
-    //              "x",
-    //              runTime.timeName(),
-    //              mesh,
-    //              IOobject::NO_READ,
-    //              IOobject::AUTO_WRITE
-    //          ),
-    //          mesh,
-    //          mesh.C().component(vector::X)
-    //      )
-    //  );
-    // volScalarField& x = _x();
-
-    // _y = autoPtr<volScalarField>
-    //  (
-    //      new volScalarField
-    //      (
-    //          IOobject
-    //          (
-    //              "y",
-    //              runTime.timeName(),
-    //              mesh,
-    //              IOobject::NO_READ,
-    //              IOobject::AUTO_WRITE
-    //          ),
-    //          mesh,
-    //          mesh.C().component(vector::Y)
-    //      )
-    //  );
-    // volScalarField& y = _y();
 
     for (int j=0; j<=Ns-1; j++)
     {  
@@ -251,7 +210,7 @@ void neuralAdvection::truthSolve(List<scalar> mu_now, fileName folder)
       snapshot.col(1) = Foam2Eigen::field2Eigen(x);
       snapshot.col(2) = Foam2Eigen::field2Eigen(y);
 
-      std::string name = "./Snapshots/";
+      std::string name = "./ITHACAoutput/NUMPYsnapshots/";
       
       name.append(std::to_string(j));
       name.append(".npy");
@@ -259,8 +218,6 @@ void neuralAdvection::truthSolve(List<scalar> mu_now, fileName folder)
       cnpy::save(snapshot, name);
 
     }
-
-    // cnpy::save(snapshotMatrix, "./Snapshots/snapshotMatrix.py");
 
     // Resize to Unitary if not initialized by user (i.e. non-parametric problem)
     
@@ -290,4 +247,28 @@ bool neuralAdvection::checkWrite(Time& timeObject)
     {
         return false;
     }
+}
+
+void neuralAdvection::projection(label Nr)
+{
+	volVectorField& U = _U();
+	surfaceScalarField& phi = _phi();
+    _phi() = fvc::flux(U);
+    A_matrices.resize(Nr,Nr);
+
+    for (int j = 0; j < Nr; j++)
+    {
+        for (int k = 0; k < Nr; k++)
+        {
+            A_matrices[j, k] = fvc::domainIntegrate( fmodes[j] * (fvm::ddt(fmodes[k]) + fvm::div(phi, fmodes[k])).value());
+        }
+    }
+
+    /// Export the A matrices
+    ITHACAstream::exportMatrix(A_matrices, "A", "python",
+                               "./ITHACAoutput/Matrices/");
+    ITHACAstream::exportMatrix(A_matrices, "A", "matlab",
+                               "./ITHACAoutput/Matrices/");
+    ITHACAstream::exportMatrix(A_matrices, "A", "eigen",
+                               "./ITHACAoutput/Matrices/A_matrices");
 }

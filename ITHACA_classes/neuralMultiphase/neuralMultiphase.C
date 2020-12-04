@@ -29,7 +29,7 @@
 \*---------------------------------------------------------------------------*/
 
 #include "neuralMultiphase.H"
-#include <unsupported/Eige++n/MatrixFunctions>
+#include <unsupported/Eigen/MatrixFunctions>
 
 neuralMultiphase::neuralMultiphase(int argc, char* argv[])
 {
@@ -45,8 +45,16 @@ neuralMultiphase::neuralMultiphase(int argc, char* argv[])
 
     argList& args = _args();
 
-	  #include "createTime.H"
-	  #include "createMesh.H"
+	#include "createTime.H"
+	#include "createMesh.H"
+
+	_pimple = autoPtr<pimpleControl>
+    (
+		new pimpleControl
+        (
+			mesh
+		)
+  	);
 
     ITHACAdict = new IOdictionary
     (
@@ -60,8 +68,9 @@ neuralMultiphase::neuralMultiphase(int argc, char* argv[])
         )
     );
 
-	  #include "createFields.H"
-    #include "createPhi.H"
+	#include "createFields.H"
+	#include "createPhi.H"
+	#include "createFvOptions.H"
 
     para = ITHACAparameters::getInstance(mesh, runTime);
     offline = ITHACAutilities::check_off();
@@ -71,34 +80,38 @@ neuralMultiphase::neuralMultiphase(int argc, char* argv[])
 
 /* Member functions */
 
-void neuralAdvection::truthSolve(List<scalar> mu_now, fileName folder)
+void neuralMultiphase::truthSolve(List<scalar> mu_now, fileName folder)
 {
-
-    /* Declaring variables from dummy pointers in the header file */
-
     Time& runTime = _runTime();
-    fvMesh& mesh = _mesh();
-    volVectorField& U = _U();
-    volScalarField& f = _f();
-    surfaceScalarField& phi = _phi();
-    
-    /* Setting time parameters */
-
     instantList Times = runTime.times();
+    fvMesh& mesh = _mesh();
+    #include "initContinuityErrs.H"
+    fv::options& fvOptions = _fvOptions();
+    pimpleControl& pimple = _pimple();
+    volVectorField& U = _U();
+    volScalarField& p_rgh = _p_rgh();
+    surfaceScalarField& phi = _phi();
+    IOMRFZoneList& MRF = _MRF();
+
+    #include "createPhases.H"
+    #include "createAbsPressure.H"
+    #include "createAlphaFluxes.H"
+    #include "createUfIfPresent.H"
+
     runTime.setEndTime(finalTime);
     runTime.setTime(Times[1], 1);
     runTime.setDeltaT(timeStep);
     nextWrite = startTime;
 
-    /* Export and store the initial conditions for the scalar field */
-
-    ITHACAstream::exportSolution(f, name(counter), folder);
-
+    ITHACAstream::exportSolution(alpha1, name(counter), folder);
+    ITHACAstream::exportSolution(p, name(counter), folder);
     ITHACAstream::exportSolution(U, name(counter), folder);
 
     std::ofstream of(folder + name(counter) + "/" + runTime.timeName());
 
-    field.append(f);
+    field.append(alpha1);
+    pfield.append(p);
+    Ufield.append(U);
 
     counter++;
     nextWrite += writeEvery;
@@ -109,77 +122,67 @@ void neuralAdvection::truthSolve(List<scalar> mu_now, fileName folder)
 
     int step = 0;
 
-    while (runTime.run())
+    while(runTime.run())
     {
+    	#include "readTimeControls.H"
+		#include "CourantNo.H"
+		#include "alphaCourantNo.H"
+		#include "setDeltaT.H"
 
-      #include "readTimeControls.H"
-    	#include "CourantNo.H"
-    	#include "setDeltaT.H"
-        
-      runTime.setEndTime(finalTime);
-      runTime++;
-      Info << "Time = " << runTime.timeName() << nl << endl;
+		runTime.setEndTime(finalTime);
+      	runTime++;
+      	Info << "Time = " << runTime.timeName() << nl << endl;
 
-      U_new = U;
-
-      if(flag==true)
-      {
-
-      	for(label l=0; l < mesh.C().size(); l++)
+      	while(pimple.loop())
       	{
-      		
-          if(flagPrint==true)
-          {
-            // Use std::cerr instead of Info to avoid buffering at compile runtime
-            std::cerr << "Before evaluateField gets called: U = " << U.internalField()[l][0] << std::endl;
-          }
+      		#include "alphaControls.H"
+            #include "alphaEqnSubCycle.H"
 
-          U_new[l] = evaluateField(mesh.C()[l][0], mesh.C()[l][1], runTime.value());
+            mixture.correct();
 
-      		if(flagPrint==true)
-          {
-            std::cerr << "After evaluateField gets called: U_new = " << U_new.internalField()[l][0] << std::endl;
-          }
+            #include "UEqn.H"
+            while (pimple.correct())
+            {
+                #include "pEqn.H"
+            }
       	}
-      }
 
-      // Calculating the updated flux with the new, corrected velocity field
+      	Info << "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
+             << "  ClockTime = " << runTime.elapsedClockTime() << " s"
+             << nl << endl;
 
-      _phi() = fvc::flux(U_new);
+        if (checkWrite(runTime))
+        {
+        	step++;
+            timesteps.push_back(runTime.value());
 
-      // Assembling and solving the full-order system of LAEs
+        	ITHACAstream::exportSolution(alpha1, name(counter), folder);
+        	ITHACAstream::exportSolution(p, name(counter), folder);
+            ITHACAstream::exportSolution(U, name(counter), folder);
+            std::ofstream of(folder + name(counter) + "/" + runTime.timeName());
 
-		  #include "createEqn.H"
+            field.append(alpha1);
+            pfield.append(p);
+            Ufield.append(U);
 
-      Info << "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
-          << "  ClockTime = " << runTime.elapsedClockTime() << " s"
-          << nl << endl;
+            counter++;
+            nextWrite += writeEvery;
+            writeMu(mu_now);
 
-      if (checkWrite(runTime))
-      {
+            mu_samples.conservativeResize(mu_samples.rows() + 1, mu_now.size() + 1);
+            mu_samples(mu_samples.rows() - 1, 0) = atof(runTime.timeName().c_str());
 
-          step++;
-          timesteps.push_back(runTime.value());
+            for (int i = 0; i < mu_now.size(); i++)
+            {
+                mu_samples(mu_samples.rows() - 1, i + 1) = mu_now[i];
+            }
+        }
+    }
 
-          ITHACAstream::exportSolution(f, name(counter), folder);
-          ITHACAstream::exportSolution(U_new, name(counter), folder);
-
-          std::ofstream of(folder + name(counter) + "/" + runTime.timeName());
-
-          field.append(f);
-
-          counter++;
-          nextWrite += writeEvery;
-          writeMu(mu_now);
-          
-          mu_samples.conservativeResize(mu_samples.rows() + 1, mu_now.size() + 1);
-          mu_samples(mu_samples.rows() - 1, 0) = atof(runTime.timeName().c_str());
-
-          for (int i = 0; i < mu_now.size(); i++)
-          {
-              mu_samples(mu_samples.rows() - 1, i + 1) = mu_now[i];
-          }
-      }
+    if (system("mkdir -p ./ITHACAoutput/NUMPYsnapshots") == -1)
+    {
+        Info << "Error :  " << strerror(errno) << endl; 
+        exit(0);
     }
 
     std::ofstream output_file("./ITHACAoutput/NUMPYsnapshots/timesteps.txt");
@@ -212,8 +215,6 @@ void neuralAdvection::truthSolve(List<scalar> mu_now, fileName folder)
 
     }
 
-    // Resize to Unitary if not initialized by user (i.e. non-parametric problem)
-    
     if (mu.cols() == 0)
     {
         mu.resize(1, 1);
@@ -226,7 +227,7 @@ void neuralAdvection::truthSolve(List<scalar> mu_now, fileName folder)
     }
 }
 
-bool neuralAdvection::checkWrite(Time& timeObject)
+bool neuralMultiphase::checkWrite(Time& timeObject)
 {
     scalar diffnow = mag(nextWrite - atof(timeObject.timeName().c_str()));
     scalar diffnext = mag(nextWrite - atof(timeObject.timeName().c_str()) -
@@ -240,28 +241,4 @@ bool neuralAdvection::checkWrite(Time& timeObject)
     {
         return false;
     }
-}
-
-void neuralAdvection::projection(label Nr)
-{
-	volVectorField& U = _U();
-	surfaceScalarField& phi = _phi();
-    _phi() = fvc::flux(U);
-    A_matrices.resize(Nr,Nr);
-
-    for (int j = 0; j < Nr; j++)
-    {
-        for (int k = 0; k < Nr; k++)
-        {
-            A_matrices[j, k] = fvc::domainIntegrate( fmodes[j] * (fvm::ddt(fmodes[k]) + fvm::div(phi, fmodes[k])).value());
-        }
-    }
-
-    /// Export the A matrices
-    ITHACAstream::exportMatrix(A_matrices, "A", "python",
-                               "./ITHACAoutput/Matrices/");
-    ITHACAstream::exportMatrix(A_matrices, "A", "matlab",
-                               "./ITHACAoutput/Matrices/");
-    ITHACAstream::exportMatrix(A_matrices, "A", "eigen",
-                               "./ITHACAoutput/Matrices/A_matrices");
 }

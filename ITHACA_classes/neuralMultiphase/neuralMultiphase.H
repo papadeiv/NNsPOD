@@ -27,15 +27,25 @@ License
 #ifndef neuralMultiphase_H
 #define neuralMultiphase_H
 #include "fvCFD.H"
+#include "fvOptions.H"
 #include "CMULES.H"
 #include "pimpleControl.H"
 #include "interpolation.H"
 #include "singlePhaseTransportModel.H"
+#include "immiscibleIncompressibleTwoPhaseMixture.H"
 #include "fixedFluxPressureFvPatchScalarField.H"
-#include "steadyNS.H"
+#include "IOMRFZoneList.H"
+#include "subCycle.H"
+#include "unsteadyNS.H"
+#include "EulerDdtScheme.H"
+#include "localEulerDdtScheme.H"
+#include "CrankNicolsonDdtScheme.H"
 #include "cnpy.H"
-#include <iostream>
-
+#include <stdlib.h>
+#include <bits/stdc++.h> 
+#include <iostream> 
+#include <sys/stat.h> 
+#include <sys/types.h>
 
 class neuralMultiphase: public unsteadyNS
 {
@@ -56,35 +66,23 @@ class neuralMultiphase: public unsteadyNS
 
         scalar nextWrite;
 
-        bool adjustTimeStep;
-
-        scalar maxCo;
-
-        scalar maxDeltaT;
-
-        label counter2 = 1;
-
-        word timedepbcMethod;
-
-        Eigen::MatrixXd timeBCoff;
-
-        word timeDerivativeSchemeOrder;
+        autoPtr<volScalarField> _p_rgh;
 
         PtrList<volScalarField> field;
 
         PtrList<volScalarField> shifted_field;
 
-        autoPtr<volScalarField> _f;
+        PtrList<volScalarField> pfield;
 
-        autoPtr<volScalarField> _shifted_f;
+        PtrList<volVectorField> Ufield;
 
-        volScalarModes fmodes;
+        autoPtr<volScalarField> _shifted_alpha;
 
-        bool flag;
+        volScalarModes modes;
 
-        bool flagPrint;
+        volScalarModes pmodes;
 
-        bool flagOutput;
+        volVectorModes Umodes;
 
         /******************** MEMBER FUNCTIONS ********************/
 

@@ -1,0 +1,5 @@
+
+InterpNet loss starts at 0.199931.
+InterpNet loss after 6999 epochs: 0.000143.
+
+Epoch [0]    ShiftNet loss = 6197.543695.

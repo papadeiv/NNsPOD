@@ -15,7 +15,7 @@ class ShiftNet():
         self.lr = 0.0001
         self.n_layers = 3
         self.inner_size = 20
-        self.epoch = 20000
+        self.epoch = 7500
 
         self.ref = ref
         self.test = test

@@ -5,7 +5,7 @@ import os
 
 ################################## ASSEMBLY OF THE DATASET ##################################
 
-ref, test = 0, 95
+ref, test = 0, 35
 
 with open('Training performance.txt', 'w+') as f:
 	f.write("The reference is the {:d}-th snapshot.\n".format(ref))

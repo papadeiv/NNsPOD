@@ -13,7 +13,7 @@ class InterpNet():
         self.lr = 0.001
         self.n_layers = 4
         self.inner_size = 40
-        self.epoch = 7000
+        self.epoch = 8000
 
         inner_layers = []
         for _ in range(self.n_layers):

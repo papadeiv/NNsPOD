@@ -12,10 +12,10 @@ class ShiftNet():
     def __init__(self, ref, test):
 
         self.func = nn.Sigmoid
-        self.lr = 0.0001
-        self.n_layers = 3
-        self.inner_size = 20
-        self.epoch = 7500
+        self.lr = 0.01
+        self.n_layers = 5
+        self.inner_size = 25
+        self.epoch = 15000
 
         self.ref = ref
         self.test = test
@@ -23,10 +23,10 @@ class ShiftNet():
         inner_layers = []
         for _ in range(self.n_layers):
             inner_layers.append(nn.Linear(self.inner_size, self.inner_size))
-            inner_layers.append(nn.Sigmoid())
+            inner_layers.append(nn.ReLU())
 
         self.model = nn.Sequential(
-            nn.Linear(3, self.inner_size), nn.Sigmoid(),
+            nn.Linear(3, self.inner_size), nn.ReLU(),
             *inner_layers,
             nn.Linear(self.inner_size, 2),)
 

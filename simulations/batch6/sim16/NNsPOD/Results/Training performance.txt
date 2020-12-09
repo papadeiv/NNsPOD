@@ -1,12 +1,30 @@
 
-InterpNet loss starts at 0.187777.
-InterpNet loss after 7999 epochs: 0.000139.
+InterpNet loss starts at 0.284379.
+InterpNet loss after 0 epochs: 0.284379.
 
-Epoch [0]    ShiftNet loss = 5662.201072.
-Epoch [1000]    ShiftNet loss = 4280.573567.
-Epoch [2000]    ShiftNet loss = 3426.895261.
-Epoch [3000]    ShiftNet loss = 2633.910112.
-Epoch [4000]    ShiftNet loss = 2167.097526.
-Epoch [5000]    ShiftNet loss = 1933.488303.
-Epoch [6000]    ShiftNet loss = 1526.417534.
-Epoch [7000]    ShiftNet loss = 1046.731895.
+Epoch [0]    ShiftNet loss = 16949.367225.
+
+InterpNet loss starts at 0.267688.
+InterpNet loss after 0 epochs: 0.267688.
+
+Epoch [0]    ShiftNet loss = 15140.717180.
+
+InterpNet loss starts at 0.627354.
+InterpNet loss after 0 epochs: 0.627354.
+
+Epoch [0]    ShiftNet loss = 40308.258158.
+
+InterpNet loss starts at 0.178894.
+InterpNet loss after 0 epochs: 0.178894.
+
+Epoch [0]    ShiftNet loss = 21470.132961.
+
+InterpNet loss starts at 0.206696.
+InterpNet loss after 0 epochs: 0.206696.
+
+Epoch [0]    ShiftNet loss = 17615.467240.
+
+InterpNet loss starts at 0.950343.
+InterpNet loss after 9999 epochs: 0.000043.
+
+Epoch [0]    ShiftNet loss = 5407.355874.

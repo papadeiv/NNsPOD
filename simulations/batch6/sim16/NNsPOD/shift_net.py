@@ -12,7 +12,7 @@ class ShiftNet():
     def __init__(self, ref, test):
 
         self.func = nn.Sigmoid
-        self.lr = 0.01
+        self.lr = 0.001
         self.n_layers = 5
         self.inner_size = 25
         self.epoch = 15000

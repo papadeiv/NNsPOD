@@ -5,10 +5,7 @@ import os
 
 ################################## ASSEMBLY OF THE DATASET ##################################
 
-ref, test = 0, 35
-
-with open('Training performance.txt', 'w+') as f:
-	f.write("The reference is the {:d}-th snapshot.\n".format(ref))
+ref, test = 50, 0
 
 timesteps = np.genfromtxt("../ITHACAoutput/NUMPYsnapshots/timesteps.txt")
 Ns = timesteps.size
@@ -45,6 +42,9 @@ y_ref = y[:,ref].clone().float().reshape(-1, 1)
 script_dir = os.path.dirname(__file__)
 res_dir = os.path.join(script_dir, 'Results/')
 os.makedirs(res_dir, exist_ok=True)
+
+with open('./Results/Training performance.txt', 'w+') as txtf:
+	txtf.write("The training reference is the {:d}-th snapshot.\n".format(ref))
 
 from interp_net import InterpNet
 

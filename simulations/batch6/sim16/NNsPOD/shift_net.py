@@ -12,7 +12,7 @@ class ShiftNet():
     def __init__(self, ref, test):
 
         self.func = nn.Sigmoid
-        self.lr = 0.001
+        self.lr = 0.0001
         self.n_layers = 5
         self.inner_size = 25
         self.epoch = 15000
@@ -107,7 +107,7 @@ class ShiftNet():
             if epoch % 10 == 0:
                 print('[Epoch {:4d}] {:18.8f}'.format(epoch, loss.item()))
 
-            if epoch % 100 == 0:
+            if epoch % 50 == 0:
 
                 shift_plot(100*plot_counter, x_ref, y_ref, f_ref
                                        , shift_x_test, shift_y_test, f_test

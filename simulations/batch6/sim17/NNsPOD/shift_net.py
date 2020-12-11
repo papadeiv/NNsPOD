@@ -30,7 +30,7 @@ class ShiftNet():
             *inner_layers,
             nn.Linear(self.inner_size, 2),)
 
-        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=self.lr, momentum=1.0)
+        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=self.lr, momentum=0.5)
 
 
     def build_input(self, x, y, t):
@@ -106,6 +106,8 @@ class ShiftNet():
 
             if epoch % 50 == 0:
 
+                self.save()
+
                 print('[Epoch {:4d}] {:18.8f}'.format(epoch, loss.item()))
 
                 shift_plot(plot_counter, x_ref, y_ref, f_ref
@@ -116,8 +118,6 @@ class ShiftNet():
             if epoch % 1000 == 0:
                 with open('./Results/Training performance.txt', 'a') as f:
                     f.write("Epoch [{:d}]    ShiftNet loss = {:f}.\n".format(epoch, loss))
-
-                self.save()
 
         self.save()
 

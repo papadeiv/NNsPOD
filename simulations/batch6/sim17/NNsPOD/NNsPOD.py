@@ -49,8 +49,8 @@ with open('./Results/Training performance.txt', 'w+') as txtf:
 from interp_net import InterpNet
 
 interpolate = InterpNet()
-input_ref = interpolate.build_input(x_ref, y_ref)
-interpolate.train(input_ref, f_ref)
+#input_ref = interpolate.build_input(x_ref, y_ref)
+#interpolate.train(input_ref, f_ref)
 
 trained_interpolation = torch.load('InterpNet.pt')
 

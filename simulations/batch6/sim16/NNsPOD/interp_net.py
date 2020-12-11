@@ -10,10 +10,10 @@ class InterpNet():
     def __init__(self):
 
         self.func = nn.Sigmoid
-        self.lr = 0.001
+        self.lr = 0.0001
         self.n_layers = 4
         self.inner_size = 40
-        self.epoch = 15000
+        self.epoch = 45000
 
         inner_layers = []
         for _ in range(self.n_layers):
@@ -54,7 +54,9 @@ class InterpNet():
 
                     f.write("\nInterpNet loss starts at {:f}.".format(loss.item()))
 
-            if epoch % 100 == 0:
+            if epoch % 50 == 0:
+
+                self.save()
 
                 print('[epoch {:4d}] {:18.8f}'.format(epoch, loss.item()))
 

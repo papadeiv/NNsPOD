@@ -92,24 +92,27 @@ class ShiftNet():
                     f_test = f.clone().detach().numpy()
 
 
-                loss += torch.sum(torch.abs((shifted_f.flatten() - f)))
+                loss += torch.sum((shifted_f.flatten() - f).pow(2))
                 snap_counter += 1
 
-            loss = loss/Ns
+            loss = torch.sqrt(loss)/Ns
             loss.backward()
 
             self.optimizer.step()
+
+            print('[Epoch {:4d}] {:18.8f}'.format(epoch, loss.item()))
 
             with open('./Results/Loss.csv', 'a', newline='') as csvf:
                 writer = csv.writer(csvf)
                 writer.writerow([epoch, loss.item()])
 
-            if epoch % 10 == 0:
-                print('[Epoch {:4d}] {:18.8f}'.format(epoch, loss.item()))
-
             if epoch % 50 == 0:
 
-                shift_plot(100*plot_counter, x_ref, y_ref, f_ref
+                self.save()
+
+                print('[Epoch {:4d}] {:18.8f}'.format(epoch, loss.item()))
+
+                shift_plot(plot_counter, x_ref, y_ref, f_ref
                                        , shift_x_test, shift_y_test, f_test
                                        , loss.item())
                 plot_counter += 1

@@ -1,0 +1,5 @@
+The training reference is the 0-th snapshot.
+
+InterpNet loss starts at 0.464303.
+InterpNet loss after 99999 epochs: 0.000100.
+

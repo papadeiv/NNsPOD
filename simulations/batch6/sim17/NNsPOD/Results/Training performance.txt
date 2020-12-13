@@ -1,5 +1,9 @@
 The training reference is the 0-th snapshot.
-
-InterpNet loss starts at 0.464303.
-InterpNet loss after 99999 epochs: 0.000100.
-
+Epoch [0]    ShiftNet loss = 3299.052699.
+Epoch [1000]    ShiftNet loss = 652.214549.
+Epoch [2000]    ShiftNet loss = 96.402817.
+Epoch [3000]    ShiftNet loss = 90.736624.
+Epoch [4000]    ShiftNet loss = 93.441696.
+Epoch [5000]    ShiftNet loss = 96.947612.
+Epoch [6000]    ShiftNet loss = 116.214758.
+Epoch [7000]    ShiftNet loss = 103.645215.

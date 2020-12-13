@@ -5,7 +5,7 @@ import os
 
 ################################## ASSEMBLY OF THE DATASET ##################################
 
-ref, test = 0, 25
+ref, test = 0, 35
 
 timesteps = np.genfromtxt("../ITHACAoutput/NUMPYsnapshots/timesteps.txt")
 Ns = timesteps.size
@@ -49,17 +49,24 @@ with open('./Results/Training performance.txt', 'w+') as txtf:
 from interp_net import InterpNet
 
 interpolate = InterpNet()
-#input_ref = interpolate.build_input(x_ref, y_ref)
-#interpolate.train(input_ref, f_ref)
 
-trained_interpolation = torch.load('InterpNet.pt')
+if os.path.exists('./TrainedModels/InterpNet.pt'):
+
+	trained_interpolation = torch.load('./TrainedModels/InterpNet.pt')
+
+else:
+
+	input_ref = interpolate.build_input(x_ref, y_ref)
+	interpolate.train(input_ref, f_ref)
+	trained_interpolation = torch.load('./TrainedModels/InterpNet.pt')
+
 
 from shift_net import ShiftNet
 
 shift = ShiftNet(ref, test)
 shift.train(x, y, timesteps, f)
 
-trained_shift = torch.load('ShiftNet.pt')
+trained_shift = torch.load('./TrainedModels/ShiftNet.pt')
 
 ################################## GENERALIZATION ##################################
 

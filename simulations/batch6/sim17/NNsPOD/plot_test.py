@@ -51,7 +51,7 @@ def interp_plot(idx, input_ref, f_ref, interpolated_f_ref, loss):
     ax.view_init(elev=90, azim=270)
 
     fig_name = 'InterpNet_output{:d}.png'.format(idx)
-    plt.suptitle('Epoch [{:d}]: Interpolation loss = {:f}\n\nGreen: Reference snapshot\nBlack: InterpNet output'.format(100*idx, loss), fontsize=8)
+    plt.suptitle('Epoch [{:d}]: Interpolation loss = {:f}\n\nGreen: Reference snapshot\nBlack: InterpNet output'.format(50*idx, loss), fontsize=8)
     plt.savefig(interp_dir + fig_name)
     
 

@@ -10,10 +10,10 @@ class InterpNet():
     def __init__(self):
 
         self.func = nn.Sigmoid
-        self.lr = 0.00001
+        self.lr = 0.001
         self.n_layers = 4
         self.inner_size = 40
-        self.epoch = 100000
+        self.epoch = 60000
 
         inner_layers = []
         for _ in range(self.n_layers):
@@ -56,7 +56,9 @@ class InterpNet():
 
             if epoch % 50 == 0:
 
-                print('[epoch {:4d}] {:18.8f}'.format(epoch, loss.item()))
+                self.save()
+
+                print('[Epoch {:4d}] {:18.8f}'.format(epoch, loss.item()))
 
                 interp_plot(plot_counter, coordinates.clone().detach().numpy()
                                         , reference.clone().detach().numpy()
@@ -75,4 +77,8 @@ class InterpNet():
 
     def save(self):
 
-        torch.save(self.model, 'InterpNet.pt')
+        script_dir = os.path.dirname(__file__)
+        res_dir = os.path.join(script_dir, 'TrainedModels/')
+        os.makedirs(res_dir, exist_ok=True)
+
+        torch.save(self.model, './TrainedModels/InterpNet.pt')

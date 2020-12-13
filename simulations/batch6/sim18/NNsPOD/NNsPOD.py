@@ -14,7 +14,7 @@ f = []
 x = []
 y = []
 
-for j in range(ref+1):
+for j in range(Ns):
 
     snap_name = "../ITHACAoutput/NUMPYsnapshots/{:d}.npy".format(j)
     X = np.load(snap_name)

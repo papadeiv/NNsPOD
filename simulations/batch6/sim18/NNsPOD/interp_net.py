@@ -10,10 +10,10 @@ class InterpNet():
     def __init__(self):
 
         self.func = nn.Sigmoid
-        self.lr = 0.0001
+        self.lr = 0.0005
         self.n_layers = 4
         self.inner_size = 40
-        self.epoch = 4#5000
+        self.epoch = 60000
 
         inner_layers = []
         for _ in range(self.n_layers):

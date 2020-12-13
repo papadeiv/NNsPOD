@@ -12,7 +12,7 @@ class ShiftNet():
     def __init__(self, ref, test):
 
         self.func = nn.Sigmoid
-        self.lr = 0.0001
+        self.lr = 0.005
         self.n_layers = 5
         self.inner_size = 25
         self.epoch = 30000
@@ -105,11 +105,10 @@ class ShiftNet():
                 loss += torch.sum(torch.abs(shifted_f.flatten() - f))
                 snap_counter += 1
 
-            loss = loss/(self.ref + 1)
+            loss = loss/Ns
             loss.backward()
 
             self.optimizer.step()
-            self.save(epoch)
 
             print('[Epoch {:4d}] {:18.8f}'.format(epoch, loss.item()))
 

@@ -1,4 +1,0 @@
-The training reference is the 0-th snapshot.
-Epoch [0]    ShiftNet loss = 4089.379084.
-Epoch [1000]    ShiftNet loss = 1066.218824.
-Epoch [2000]    ShiftNet loss = 693.970378.

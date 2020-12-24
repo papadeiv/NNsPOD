@@ -1,4 +1,5 @@
 EXE_INC = \
+    -I../../system/controlDict \
     -I$(LIB_SRC)/transportModels/twoPhaseMixture/lnInclude \
     -I$(LIB_SRC)/transportModels \
     -I$(LIB_SRC)/transportModels/incompressible/lnInclude \
@@ -27,7 +28,7 @@ EXE_INC = \
     -I$(LIB_ITHACA_SRC)/ITHACA_FOMPROBLEMS/steadyNS \
     -I$(LIB_ITHACA_SRC)/ITHACA_FOMPROBLEMS/steadyNS_simple \
     -I$(LIB_ITHACA_SRC)/ITHACA_FOMPROBLEMS/unsteadyNS \
-    -I$(LIB_ITHACA_SRC)/ITHACA_FOMPROBLEMS/neuralAdvection \
+    -I$(LIB_ITHACA_SRC)/ITHACA_FOMPROBLEMS/neuralMultiphase \
     -I$(LIB_ITHACA_SRC)/ITHACA_CORE/ITHACAPOD \
     -I$(LIB_ITHACA_SRC)/ITHACA_CORE/Containers \
     -I$(LIB_ITHACA_SRC)/ITHACA_ROMPROBLEMS/reducedProblem \

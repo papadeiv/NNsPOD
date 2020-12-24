@@ -12,10 +12,10 @@ class ShiftNet():
     def __init__(self, ref, test):
 
         self.func = nn.Sigmoid
-        self.lr = 0.001
+        self.lr = 0.0001
         self.n_layers = 5
         self.inner_size = 25
-        self.epoch = 30000
+        self.epoch = 100#0000
         self.checkpoint = 0
         self.plot_counter = 0
 
@@ -32,7 +32,7 @@ class ShiftNet():
             *inner_layers,
             nn.Linear(self.inner_size, 2),)
 
-        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
+        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, betas=(0.75,0.9))
 
 
     def build_input(self, x, y, t):
@@ -59,13 +59,13 @@ class ShiftNet():
 
         Ns = Ts.size
 
-        if os.path.exists('./TrainedModels/ShiftNet.pt'):
+        if os.path.exists('./TrainedModels/temp_ShiftNet.pt'):
 
-            print('Pre-trained model found\nLoading state parameters\n\n')
+            print('\n######### Temporary pre-trained model found #########\n######### Loading state parameters #########\n\n')
             
             self.load()
-            for name, param in self.model.named_parameters():
-                print(name, param)
+            #for name, param in self.model.named_parameters():
+            #    print(name, param)
 
         trained_interpolation = torch.load('./TrainedModels/InterpNet.pt')
 
@@ -102,14 +102,13 @@ class ShiftNet():
                     f_test = f.clone().detach().numpy()
 
 
-                loss += torch.sum(torch.abs(shifted_f.flatten() - f))
+                loss += torch.sqrt(torch.sum(torch.square(shifted_f.flatten() - f)))
                 snap_counter += 1
 
-            loss = loss/(self.test + 1)
+            loss = loss/Ns
             loss.backward()
 
             self.optimizer.step()
-            self.save(epoch)
 
             print('[Epoch {:4d}] {:18.8f}'.format(epoch, loss.item()))
 
@@ -117,9 +116,11 @@ class ShiftNet():
                 writer = csv.writer(csvf)
                 writer.writerow([epoch, loss.item()])
 
-            if epoch % 50 == 0:
+            if epoch % 10 == 0:
 
-                self.save(epoch)
+                print('\n######### SAVING CURRENT STATE #########\n')
+
+                self.temp_save(epoch)
 
                 shift_plot(self.plot_counter, x_ref, y_ref, f_ref
                                        , shift_x_test, shift_y_test, f_test
@@ -130,10 +131,12 @@ class ShiftNet():
                 with open('./Results/Training performance.txt', 'a') as f:
                     f.write("Epoch [{:d}]    ShiftNet loss = {:f}.\n".format(epoch, loss))
 
-        self.save(epoch)
+        print('######### Training complete #########\nExporting model state for generalization\n\n')
+        self.save()
+        print('######### Model exported succesfully #########\n\n\n')
 
 
-    def save(self, epoch):
+    def temp_save(self, epoch):
 
         script_dir = os.path.dirname(__file__)
         res_dir = os.path.join(script_dir, 'TrainedModels/')
@@ -145,16 +148,21 @@ class ShiftNet():
             'state_dict': self.model.state_dict(),
             'optimizer': self.optimizer.state_dict()}
 
-        torch.save(state, './TrainedModels/ShiftNet.pt')
+        torch.save(state, './TrainedModels/temp_ShiftNet.pt')
 
     def load(self):
 
-        state = torch.load('./TrainedModels/ShiftNet.pt')
+        state = torch.load('./TrainedModels/temp_ShiftNet.pt')
 
         self.model.load_state_dict(state['state_dict'])
         self.optimizer.load_state_dict(state['optimizer'])
         self.checkpoint = state['epoch']
         self.plot_counter = state['plot_counter']
+
+
+    def save(self):
+
+        torch.save(self.model, './TrainedModels/ShiftNet.pt') 
 
 
 

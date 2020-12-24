@@ -30,11 +30,11 @@ def clean(array, flag=False, treshold=0.01):
 
 def interp_plot(idx, input_ref, f_ref, interpolated_f_ref, loss):
     
-    x_ref = input_ref[:450,0]
-    y_ref = np.zeros(150)
-    for k in range(150):
+    x_ref = input_ref[:200,0]
+    y_ref = np.zeros(100)
+    for k in range(100):
 
-    	y_ref[k] = input_ref[k*450+1,1]
+    	y_ref[k] = input_ref[k*200+1,1]
 
     x, y = np.meshgrid(x_ref, y_ref.T)
     z = f_ref.reshape(y_ref.size, x_ref.size)
@@ -57,14 +57,14 @@ def interp_plot(idx, input_ref, f_ref, interpolated_f_ref, loss):
 
 def shift_plot(idx, x_ref, y_ref, f_ref, shifted_x, shifted_y, f_test, loss):
 
-    x_tmp = x_ref[:450]
-    shifted_x_tmp = shifted_x[:450]
-    y_tmp = np.zeros(150)
-    shifted_y_tmp = np.zeros(150)
-    for k in range(150):
+    x_tmp = x_ref[:200]
+    shifted_x_tmp = shifted_x[:200]
+    y_tmp = np.zeros(100)
+    shifted_y_tmp = np.zeros(100)
+    for k in range(100):
 
-        y_tmp[k] = y_ref[k*450+1]
-        shifted_y_tmp[k] = shifted_y[k*450+1]
+        y_tmp[k] = y_ref[k*200+1]
+        shifted_y_tmp[k] = shifted_y[k*200+1]
         
 
     x, y = np.meshgrid(x_tmp, y_tmp)

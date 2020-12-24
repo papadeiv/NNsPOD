@@ -14,7 +14,7 @@ f = []
 x = []
 y = []
 
-for j in range(test+1):
+for j in range(Ns):
 
     snap_name = "../ITHACAoutput/NUMPYsnapshots/{:d}.npy".format(j)
     X = np.load(snap_name)
@@ -66,13 +66,14 @@ from shift_net import ShiftNet
 shift = ShiftNet(ref, test)
 shift.train(x, y, timesteps, f)
 
+print('####### Loading trained model parameters #######\n\n')
 trained_shift = torch.load('./TrainedModels/ShiftNet.pt')
 
 ################################## GENERALIZATION ##################################
 
 X = np.zeros((Nh, Ns))
 counter = 0
-
+print('####### Preparing for generalization #######\n')
 for snap_x, snap_y, t, snap_f in zip(x.T, y.T, timesteps, f.T):
 
 	output = trained_shift.forward(shift.build_input(snap_x, snap_y, t))
@@ -91,4 +92,6 @@ for snap_x, snap_y, t, snap_f in zip(x.T, y.T, timesteps, f.T):
 	X[:, counter] = snapshot
 	counter += 1
 
+print('####### Generalization complete #######\n\n')
 np.save("../ITHACAoutput/NUMPYsnapshots/shifted_snapshot_matrix", X)
+print('####### Shifted snapshot matrix exported succesfully #######\n')

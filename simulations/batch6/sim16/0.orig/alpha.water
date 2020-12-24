@@ -25,6 +25,25 @@ boundaryField
     left
     {
         type            zeroGradient;
+      /*type			codedFixedValue;
+        value           $internalField;
+        
+        name            computedValue;
+        code            
+        #{
+        	const fvPatch& boundaryPatch = patch();
+        	const vectorField& Cf = boundaryPatch.Cf();
+        	forAll(Cf, faceI)
+        	{
+        		scalar y = Cf[faceI].y();
+        		scalar x = Cf[faceI].x();
+        		// const scalar r = exp((-0.5)*(x*x));
+        		if(x<0)
+        		{
+        			(*this)[faceI] == 0;
+        		}	
+        	}
+    	#};*/
     }
     right
     {

@@ -23,9 +23,9 @@ int main(int argc, char* argv[])
     offline sim16(argc, argv);
     
     sim16.startTime = 0;
-    sim16.finalTime = 5;
+    sim16.finalTime = 10;
     sim16.timeStep = 0.01;
-    sim16.writeEvery = 0.05;
+    sim16.writeEvery = 0.1;
 
     ITHACAparameters* para = ITHACAparameters::getInstance(sim16._mesh(), sim16._runTime());
     int NmodesOut = para->ITHACAdict->lookupOrDefault<int>("NmodesOut", 15);

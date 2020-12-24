@@ -3,7 +3,7 @@
 #include "ITHACAPOD.H"
 #include "forces.H"
 #include "IOmanip.H"
-#include "ReducedSteadyNS.H"
+//#include "ReducedSteadyNS.H"
 
 
 class online : public neuralMultiphase
@@ -19,13 +19,13 @@ class online : public neuralMultiphase
 
 int main(int argc, char* argv[])
 {
+    
+    online sim18(argc, argv);
 
-    online sim16(argc, argv);
-
-    volScalarField shifted_f("shifted_f", sim16._shifted_f());
+    volScalarField shifted_alpha("shifted_alpha", sim18._shifted_alpha());
     Eigen::MatrixXd X;
 
-    X = cnpy::load(X, "./NNsPOD/NUMPYsnapshots/shifted_snapshot_matrix.npy", "colMajor");
+    X = cnpy::load(X, "./ITHACAoutput/NUMPYsnapshots/shifted_snapshot_matrix.npy", "colMajor");
 
     int Nh = X.rows();
     int Ns = X.cols();
@@ -37,13 +37,13 @@ int main(int argc, char* argv[])
 
         Eigen::VectorXd shifted_snapshot = X.col(j);
 
-        shifted_f = Foam2Eigen::Eigen2field(shifted_f, shifted_snapshot); // shifted_f.size() = Nh
-        ITHACAstream::exportSolution(shifted_f, name(j), folder);
+        shifted_alpha = Foam2Eigen::Eigen2field(shifted_alpha, shifted_snapshot); // shifted_f.size() = Nh
+        ITHACAstream::exportSolution(shifted_alpha, name(j), folder);
 
-        sim16.shifted_field.append(shifted_f); // shifted_field.size() = Nh*(j+1)
+        sim18.shifted_field.append(shifted_alpha); // shifted_field.size() = Nh*(j+1)
 
     }// shifted_field.size() = Nh*Ns
 
-    ITHACAPOD::getModes(sim16.shifted_field, sim16.fmodes, shifted_f().name(), sim16.podex, 0, 0, 10);
+    ITHACAPOD::getModes(sim18.shifted_field, sim18.modes, "shifted_alpha", sim18.podex, 0, 0, 10);
 
 }

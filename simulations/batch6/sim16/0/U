@@ -24,7 +24,8 @@ boundaryField
 {
     left
     {
-        type            noSlip;
+        type			fixedValue;
+        value           uniform (1 0 0);
     }
     right
     {

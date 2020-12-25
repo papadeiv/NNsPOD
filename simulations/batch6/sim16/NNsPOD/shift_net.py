@@ -15,7 +15,7 @@ class ShiftNet():
         self.lr = 0.0001
         self.n_layers = 5
         self.inner_size = 25
-        self.epoch = 100#0000
+        self.epoch = 10000
         self.checkpoint = 0
         self.plot_counter = 0
 

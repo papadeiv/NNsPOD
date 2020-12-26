@@ -13,8 +13,8 @@ class ShiftNet():
 
         self.func = nn.Sigmoid
         self.lr = 0.0001
-        self.n_layers = 5
-        self.inner_size = 25
+        self.n_layers = 3
+        self.inner_size = 15
         self.epoch = 10000
         self.checkpoint = 0
         self.plot_counter = 0
@@ -102,7 +102,7 @@ class ShiftNet():
                     f_test = f.clone().detach().numpy()
 
 
-                loss += torch.sqrt(torch.sum(torch.square(shifted_f.flatten() - f)))
+                loss += torch.sum(torch.abs(shifted_f.flatten() - f))
                 snap_counter += 1
 
             loss = loss/Ns

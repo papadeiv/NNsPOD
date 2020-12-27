@@ -84,5 +84,5 @@ def shift_plot(idx, x_ref, y_ref, f_ref, shifted_x, shifted_y, f_test, loss):
     ax.view_init(elev=90, azim=270)
 
     fig_name = 'ShiftNet_output{:d}.png'.format(idx)
-    plt.suptitle('Epoch [{:d}]: Shift loss = {:f}\n\nGreen: Reference snapshot\nBlue: Test snapshot\nRed: Shifted-test snapshot'.format(idx*50, loss), fontsize=8)
+    plt.suptitle('Epoch [{:d}]: Shift loss = {:f}\n\nGreen: Reference snapshot\nBlue: Test snapshot\nRed: Shifted-test snapshot'.format(idx, loss), fontsize=8)
     plt.savefig(shift_dir + fig_name)

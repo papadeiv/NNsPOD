@@ -12,10 +12,10 @@ class ShiftNet():
     def __init__(self, ref, test):
 
         self.func = nn.Sigmoid
-        self.lr = 0.0001
+        self.lr = 0.001
         self.n_layers = 3
         self.inner_size = 15
-        self.epoch = 10000
+        self.epoch = 30000
         self.checkpoint = 0
         self.plot_counter = 0
 
@@ -32,7 +32,7 @@ class ShiftNet():
             *inner_layers,
             nn.Linear(self.inner_size, 2),)
 
-        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, betas=(0.75,0.9))
+        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
 
 
     def build_input(self, x, y, t):
@@ -116,13 +116,13 @@ class ShiftNet():
                 writer = csv.writer(csvf)
                 writer.writerow([epoch, loss.item()])
 
-            if epoch % 10 == 0:
+            if epoch % 100 == 0:
 
                 print('\n######### SAVING CURRENT STATE #########\n')
 
                 self.temp_save(epoch)
 
-                shift_plot(self.plot_counter, x_ref, y_ref, f_ref
+                shift_plot(self.plot_counter*100, x_ref, y_ref, f_ref
                                        , shift_x_test, shift_y_test, f_test
                                        , loss.item())
                 self.plot_counter += 1

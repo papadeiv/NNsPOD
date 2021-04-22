@@ -1,3 +1,0 @@
-The reference is the 50-th snapshot
-Intepolation loss at 9 epochs: 0.387405Shift loss at 299 epochs: 13737.038209
-The learning rate has been updated 0 times

@@ -1,3 +1,0 @@
-reducedTransport.C
-
-EXE = $(FOAM_USER_APPBIN)/reducedTransport

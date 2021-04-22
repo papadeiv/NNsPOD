@@ -14,7 +14,7 @@ class InterpNet():
         self.lr = 0.001
         self.n_layers = 2
         self.inner_size = 40
-        self.epoch = 30000
+        self.epoch = 25000
 
         inner_layers = []
         for _ in range(self.n_layers):
@@ -59,7 +59,7 @@ class InterpNet():
 
                     f.write("\nInterpNet loss starts at {:f}.".format(loss.item()))
 
-            if epoch % 10 == 0:
+            if epoch % 100 == 0 or epoch == 0:
 
                 self.save()
 

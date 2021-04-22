@@ -55,7 +55,7 @@ def interp_plot(idx, input_ref, f_ref, interpolated_f_ref, loss):
     ax.view_init(elev=90, azim=270)
 
     fig_name = 'InterpNet_output{:d}.png'.format(idx)
-    plt.suptitle('Interpolation loss (epoch = {:d}) = {:f}\n\nGreen: Reference configuration (80-th snapshot)\nBlack: InterpNet output'.format(10*idx, loss), fontsize=18, x=0.5, y=0.9)
+    plt.suptitle('Interpolation loss (epoch = {:d}) = {:f}\n\nGreen: Reference configuration (80-th snapshot)\nBlack: InterpNet output'.format(100*idx, loss), fontsize=18, x=0.5, y=0.9)
     plt.savefig(interp_dir + fig_name)
     
 
@@ -91,5 +91,5 @@ def shift_plot(idx, x_ref, y_ref, f_ref, shifted_x, shifted_y, f_test, loss):
     ax.view_init(elev=90, azim=270)
 
     fig_name = 'ShiftNet_output{:d}.png'.format(idx)
-    plt.suptitle('Shift loss (epoch = {:d}) = {:f}\n\nGreen: Reference configuration (80-th snapshot)\nRed: ShiftNet output (test snapshot)'.format(20*idx, loss), fontsize=18, x=0.5, y=0.9)
+    plt.suptitle('Shift loss (epoch = {:d}) = {:f}\n\nGreen: Reference configuration (80-th snapshot)\nRed: ShiftNet output (test snapshot)'.format(100*idx, loss), fontsize=18, x=0.5, y=0.9)
     plt.savefig(shift_dir + fig_name)

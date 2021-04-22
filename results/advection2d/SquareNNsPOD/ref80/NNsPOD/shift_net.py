@@ -117,7 +117,7 @@ class ShiftNet():
                 writer = csv.writer(csvf)
                 writer.writerow([epoch, loss.item()])
 
-            if epoch % 20 == 0:
+            if epoch % 100 == 0 or epoch == 0:
 
                 self.save(epoch)
 

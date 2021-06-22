@@ -1,3 +1,0 @@
-transpDomFoam.C
-
-EXE = $(FOAM_APPBIN)/transpDomFoam

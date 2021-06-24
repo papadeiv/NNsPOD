@@ -73,8 +73,8 @@ Now in `online/ITHACAoutput/Offline` the pre-processed shifted snaphots will be 
 
 ## NNsPOD scripts
 In the directory `NNsPOD` there are 4 scripts:
-	[x] `main.py` is the script to be launched for running NNsPOD. In it the reference configuration for the training is specified alongside the test snapshot to be plotted for the shift monitoring (line 8);
-	[x] `interp_net.py` implements the __InterpNet__ part of NNsPOD. The network's parameters can be specified (lines 15-27 and 42);
-	[x] `shift_net.py` implements the __ShiftNet__ part of NNsPOD. The network's paramaters can be specified (lines 16-38 and 46);
-	[x] `plot_test.py` is the script that creates the plots for the training stages of __InterpNet__ and __ShiftNet__. The size of the 2-dimensional grid has to be specified (lines 19-20)
+- [x] `main.py` is the script to be launched for running NNsPOD. In it the reference configuration for the training is specified alongside the test snapshot to be plotted for the shift monitoring (line 8);
+- [x] `interp_net.py` implements the __InterpNet__ part of NNsPOD. The network's parameters can be specified (lines 15-27 and 42);
+- [x] `shift_net.py` implements the __ShiftNet__ part of NNsPOD. The network's paramaters can be specified (lines 16-38 and 46);
+- [x] `plot_test.py` is the script that creates the plots for the training stages of __InterpNet__ and __ShiftNet__. The size of the 2-dimensional grid has to be specified (lines 19-20)
 Once ShiftNet's training is completed `main.py` will generate in `ITHACAoutput/NUMPYsnapshots` a (numpy) shifted snapshot's matrix accoring to the autodetected best bijective mapping. Also in NNsPOD directory three folders `Plots`, `Results` and `TrainedModels` will contain, respectively, the matplotlib plots of various training stages of InterpNet and ShiftNet, the .csv files containing the loss values at each epoch of boths networks' optimisers and the fully trained networks models (weights and biases).

@@ -1,19 +1,25 @@
 # NNsPOD - Neural Network shifted-Proper Orthogonal Decomposition
 
-NNsPOD is novel machine-learning based pre-processing algorithm for the succesfull model order reduction of non-linear hyperbolic equations with unknown transport fields. It consists of a split architecture of two neural networks __InterpNet__ and __ShiftNet__ with a continuous data-flow in between (i.e. the output layer's of the former are casxaded into the input layer of the former whilst their training is performed separately).
-The project has been developed within mathLab's research group at SISSA - Scuola Internazionale degli Studi Avanzati by myself, Nicola Demo, Michele Girfoglio and Giovanni Stabile under the supervision of group's head Prof. Gianluigi Rozza.
+NNsPOD is a machine-learning based pre-processing algorithm for the model order reduction of non-linear hyperbolic equations with unknown transport fields. It consists of a split architecture of two neural networks __InterpNet__ and __ShiftNet__ with a continuous data-flow in between (i.e. the output of the former is cascaded into the input layer of the former whilst their training is performed separately).
+
+The project has been developed within mathLab's research group at SISSA - Scuola Internazionale degli Studi Avanzati by myself, Nicola Demo, Michele Girfoglio and Giovanni Stabile under the supervision of group's head Prof. Gianluigi Rozza. The results of this algorithm, as well as its detailed mathematical derivation and implementation, can be found in [our paper](https://arxiv.org/abs/2108.06558).
 The algorithm is written in __Python__ using __PyTorch__ framework and it is located in the directory `NNsPOD` of this repository.
 
+The software can be interfaced with any other library through suitable wrappers: in this repository NNsPOD has be used to decompose fluid fields derived numerically in C++ as oulined below.
+
 ## Content
-The entire repository, and the project itself, is linked with [ITHACA-FV](https://github.com/mathLab/ITHACA-FV), a C++ object-oriented library developed and maintaned at mathLab's group, by several contributors, for the implementation of various ROM techniques (including POD on which this repository is based) of full-order simulations performed in [OpenFOAM-v2006](https://www.openfoam.com/news/main-news/openfoam-v20-06).
+The repository, is linked with [ITHACA-FV](https://github.com/mathLab/ITHACA-FV), an open-source C++ suite, developed and maintaned by mathLab's group, that implements various ROM techniques (including POD on which this algorithm is based) of full-order simulations performed in [OpenFOAM-v2006](https://www.openfoam.com/news/main-news/openfoam-v20-06). 
+
+Despite that NNsPOD consists of Python scripts that can be adapted to interface with other outputs depending on the needs of the user. At the moment we are not planning to introduce an automated interface, or wrapping feature for the software. All NNsPOD's scripts can be found in the `NNsPOD` directory.
+
 The repository is organised as follows:
-- [x] `generalAdvection` is an ITHACA-FV class that allows to solve an advection equation with non-uniform, non-constant transport field and performing a shifted-Proper Orthogonal Decompostion as per __Reiss et al__;
-- [x] `neuralAdvection` reduces the same advection equation as above but by implementing NNsPOD automatic shift detection;
+- [x] `generalAdvection` is an ITHACA-FV class that allows to solve for an advection equation with non-uniform, non-constant transport field and performing a shifted-Proper Orthogonal Decompostion (the algorithm on which such technique is based is derived from a [2018 article by Reiss et al](https://arxiv.org/pdf/1512.01985.pdf));
+- [x] `neuralAdvection` reduces the same advection equation but using NNsPOD automatic shift detection;
 - [x] `neuralMultiphase` applies NNsPOD reduction to a multiphase fluid flow with specified densities and viscosities for the two fluids;
-- [x] `results` contains the numerical experiments performed in the __paper__. Specifically:
-	- [x] `advection2d/SquarePOD` uses the solver __generalAdvection__ and it refers to the simulation in Section 2 of the __paper__;
-	- [x] `advection2d/SquareNNsPOD` uses the solver __neuralAdvection__ and it refers to the simulation in Section 3 of the __paper__;
-	- [x] `multiphase` uses the solver __neuralMultiphase__ and it refers to the simulation in Section 4 of the __paper__.
+- [x] `results` contains the numerical experiments performed and reported in [our paper](https://arxiv.org/abs/2108.06558). Specifically:
+	- [x] `advection2d/SquarePOD` uses the solver __generalAdvection__ and it refers to the simulation in Section 2 of the article;
+	- [x] `advection2d/SquareNNsPOD` uses the solver __neuralAdvection__ and it refers to the simulation in Section 3 of the article;
+	- [x] `multiphase` uses the solver __neuralMultiphase__ and it refers to the simulation in Section 4 of the article.
 
 ## Installation
 Once downloaded, the content of the present repository must be moved into different directories in order for the code to compile and execute. Specifically, once both OpenFOAM and ITHACA-FV have been installed and compiled correctly, one must:

@@ -2,7 +2,7 @@
 
 NNsPOD is a machine-learning based pre-processing algorithm for the model order reduction of non-linear hyperbolic equations with unknown transport fields. It consists of a split architecture of two neural networks __InterpNet__ and __ShiftNet__ with a continuous data-flow in between (i.e. the output of the former is cascaded into the input layer of the former whilst their training is performed separately).
 
-The project has been developed within mathLab's research group at SISSA - Scuola Internazionale degli Studi Avanzati by myself, Nicola Demo, Michele Girfoglio and Giovanni Stabile under the supervision of group's head Prof. Gianluigi Rozza. The results of this algorithm, as well as its detailed mathematical derivation and implementation, can be found in [our paper](https://arxiv.org/abs/2108.06558).
+The project has been developed within mathLab's research group at SISSA - Scuola Internazionale degli Studi Avanzati by myself, Nicola Demo, Michele Girfoglio and Giovanni Stabile under the supervision of group's head Prof. Gianluigi Rozza. The results of this algorithm, as well as its detailed mathematical derivation and implementation, can be found in [our paper](https://www.sciencedirect.com/science/article/pii/S004578252200069X?dgcid=coauthor).
 The algorithm is written in __Python__ using __PyTorch__ framework and it is located in the directory `NNsPOD` of this repository.
 
 The software can be interfaced with any other library through suitable wrappers: in this repository NNsPOD has be used to decompose fluid fields derived numerically in C++ as oulined below.
@@ -16,7 +16,7 @@ The repository is organised as follows:
 - [x] `generalAdvection` is an ITHACA-FV class that allows to solve for an advection equation with non-uniform, non-constant transport field and performing a shifted-Proper Orthogonal Decompostion (the algorithm on which such technique is based is derived from a [2018 article by Reiss et al](https://arxiv.org/pdf/1512.01985.pdf));
 - [x] `neuralAdvection` reduces the same advection equation but using NNsPOD automatic shift detection;
 - [x] `neuralMultiphase` applies NNsPOD reduction to a multiphase fluid flow with specified densities and viscosities for the two fluids;
-- [x] `results` contains the numerical experiments performed and reported in [our paper](https://arxiv.org/abs/2108.06558). Specifically:
+- [x] `results` contains the numerical experiments performed and reported in [our paper](https://www.sciencedirect.com/science/article/pii/S004578252200069X?dgcid=coauthor). Specifically:
 	- [x] `advection2d/SquarePOD` uses the solver __generalAdvection__ and it refers to the simulation in Section 2 of the article;
 	- [x] `advection2d/SquareNNsPOD` uses the solver __neuralAdvection__ and it refers to the simulation in Section 3 of the article;
 	- [x] `multiphase` uses the solver __neuralMultiphase__ and it refers to the simulation in Section 4 of the article.
